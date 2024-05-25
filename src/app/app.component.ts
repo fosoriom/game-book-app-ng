@@ -13,12 +13,13 @@ export class AppComponent {
   title = 'gameBookApp';
   private authService = inject(AuthService)
   private router = inject(Router);
+  
   public finishedAuthChek = computed<boolean>(() => {
     if (this.authService.authStatus() === AuthStatus.checking) {
       return false;
     }
     return true;
-  })
+  });
 
   public authStatusChangedEffect = effect(() => {
     

@@ -14,6 +14,7 @@ export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
+
   private _currentUser = signal(<User | null>(null));
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
 
@@ -44,7 +45,7 @@ export class AuthService {
 
   checkAuthStatus(): Observable<boolean> {
 
-    const url = `${this.authStatus}/api/auth/check-status`;
+    const url = `${this.baseUrl}/api/auth/check-status`;
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -59,7 +60,8 @@ export class AuthService {
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
         map(({ user, token }) => this.setAuthentication(user, token)),
-        catchError(() => {
+        catchError((error) => {
+          console.log({error});
           this._authStatus.set(AuthStatus.notAuthenticated);
           return of(false)
         })
@@ -68,6 +70,7 @@ export class AuthService {
   }
   
   logout(){
+    console.log('logout')
     localStorage.removeItem('token')
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.notAuthenticated);
