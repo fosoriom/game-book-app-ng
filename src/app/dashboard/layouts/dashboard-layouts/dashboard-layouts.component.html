@@ -1,3 +1,19 @@
+<h1>Dashboard</h1>
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <mat-card-title>{{user()?.fullName}}</mat-card-title>
+      <mat-card-subtitle>{{user()?.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <p>
+       {{user()?.email}}
+      </p>
+    </mat-card-content>
+  </mat-card>
 <!-- <h1>Dashboard</h1>
 <hr>
 <h3>User</h3>
@@ -8,7 +24,7 @@
 <button (click)="onLogout()">
     Cerrar sesion
 </button> -->
-<mat-sidenav-container fullscreen>
+<!-- <mat-sidenav-container fullscreen>
     <mat-sidenav #sidenav mode="push" [ngStyle]="{width:'250px'}">
         <mat-toolbar color="primary">
             <span>Menú</span>
@@ -19,7 +35,10 @@
         </mat-toolbar>
         <mat-nav-list>
             <mat-list-item>
-                <a [routerLink]="['/home/companies']" routerLinkActive="router-link-active" >Companies</a>
+                <a [routerLink]="['/companies']" routerLinkActive="router-link-active" >Companies</a>
+            </mat-list-item>
+            <mat-list-item>
+                <a [routerLink]="['/companies/list']" routerLinkActive="router-link-active" >Companies</a>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
@@ -37,4 +56,4 @@
 
         <router-outlet></router-outlet>
     </div>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

@@ -10,10 +10,7 @@ import { CompanyCreateComponent } from './pages/company-create/company-create.co
 
 @NgModule({
   declarations: [
-    CompanyLayoutComponent,
     CompanyPageComponent,
-    CompanyListComponent,
-    CompanyCreateComponent
   ],
   imports: [
     CommonModule,

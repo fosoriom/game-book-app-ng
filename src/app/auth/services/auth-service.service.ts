@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environments';
 import { Observable, tap, map, pipe, catchError, throwError, of } from 'rxjs';
 import { User, AuthStatus, LoginResponse, CheckTokenResponse } from '../interfaces'
+import { Router } from '@angular/router';
 
 
 
@@ -14,6 +15,7 @@ export class AuthService {
 
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   private _currentUser = signal(<User | null>(null));
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
@@ -25,6 +27,7 @@ export class AuthService {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
     localStorage.setItem('token', token);
+    
     return true;
   }
   constructor() {
@@ -35,6 +38,17 @@ export class AuthService {
 
     const url = `${this.baseUrl}/api/auth/login`;
     const body = { email: email, password: password }
+
+    return this.http.post<LoginResponse>(url, body)
+      .pipe(
+        map(({ user, token }) => this.setAuthentication(user, token)),
+        catchError(err => throwError(() => err.error.message))
+      )
+  }
+  register(email: string, password: string, fullName:string): Observable<boolean> {
+
+    const url = `${this.baseUrl}/api/auth/register`;
+    const body = { email: email, password: password, fullName:fullName }
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
@@ -70,10 +84,10 @@ export class AuthService {
   }
   
   logout(){
-    console.log('logout')
     localStorage.removeItem('token')
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.notAuthenticated);
+    
     
   
     }

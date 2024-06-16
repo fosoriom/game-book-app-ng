@@ -1,4 +1,30 @@
-<form
+<mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+<div *ngIf="!loading" class="form-container mat-elevation-z5" >
+    <form [formGroup]="myForm" (ngSubmit)="login()">
+        <!-- <img src="./assets/images/seguridad.png" width="50%"> -->
+        <h1> Login</h1>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text" formControlName="email" matInput>
+            <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" formControlName="password" matInput >
+            <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+        <div class="center margin-top">
+            <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid">
+                <mat-icon>login</mat-icon>
+                Login
+            </button>
+        </div>
+        <span class="center margin-top">New to our platform? <a class="sign-up-link" routerLink="/register">Sign up</a></span>
+        
+
+    </form>
+</div>
+<!-- <form
 [formGroup]="myForm"
 (ngSubmit) = "login()">
     <div class="flex flex-column">
@@ -23,6 +49,7 @@
     </div>
 
 </form>
+</div> -->
 <!-- <form class="login100-form"
       autocomplete="off"
       [formGroup]="myForm"

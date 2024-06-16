@@ -1,1 +1,84 @@
-<p>company-create works!</p>
+<h1 mat-dialog-title> Company Form</h1>
+<form [formGroup]="myForm" (ngSubmit)="createCompany()">
+    <div mat-dialog-content class="">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name Company</mat-label>
+                <input formControlName="name" type="text" matInput placeholder="Name company">
+                <mat-icon matSuffix>apartment</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Foundation Year</mat-label>
+                <input formControlName="foundationYear" type="text" matInput placeholder="Foundation Year">
+                <mat-icon matSuffix>event</mat-icon>
+                <mat-hint>YYYY</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Url imagen</mat-label>
+                <input [readonly]="true" formControlName="urlImage" type="text" matInput placeholder="url image">
+                <mat-icon matSuffix>link</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <input type="file" (change)="onFileSelected($event)" />
+        </div>
+        <div class="row">
+            <img [src]="preview" class="preview" />
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid">{{company? 'Update' : 'Save'}}</button>
+    </div>
+</form>
+<!-- <div class="container">
+    <mat-toolbar>
+        <span>Create Company</span>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px;">
+        <form [formGroup]="myForm" (ngSubmit)="createCompany()">
+            <mat-grid-list cols="4" rowHeight="70px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Name Company</mat-label>
+                            <input formControlName="name" type="text" matInput placeholder="Name company">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                <mat-grid-tile [colspan]="3" [rowspan]="5">
+
+                <input type="file" (change)="onFileSelected($event)" />
+                    <button  mat-raised-button >Upload</button>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Foundation Year</mat-label>
+                        <input formControlName="foundationYear" type="text" matInput placeholder="Foundation Year">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Url imagen</mat-label>
+                        <input formControlName="urlImage" type="text" matInput placeholder="Foundation Year">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button  type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid">Guardar</button>
+                    <div class="spacer"></div>
+                    <button mat-raised-button>Cancelar</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <br>
+            <br>
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows"
+                    [style.background]="tile.color">
+                    {{tile.text}}
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </mat-card>
+</div> -->

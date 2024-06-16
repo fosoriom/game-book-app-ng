@@ -1,3 +1,22 @@
-<h1 *ngIf="!finishedAuthChek()">Loading</h1>
-<router-outlet  *ngIf="finishedAuthChek()"/> 
-
+<mat-toolbar color="primary"class="mat-elevation-z3">
+    <button mat-icon-button (click)="collapsed.set(!collapsed())">
+        <mat-icon *ngIf="user()!=null">menu</mat-icon>
+    </button>
+    <button *ngIf="user()!=null" mat-button (click)="onLogout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+    </button>
+</mat-toolbar>
+<mat-sidenav-container *ngIf="user()!=null">
+    <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+        <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<div class="content">
+    <router-outlet *ngIf="user()==null"></router-outlet>
+</div>

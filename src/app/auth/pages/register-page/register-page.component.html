@@ -1,27 +1,39 @@
+<mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+<div *ngIf="!loading" class="form-container mat-elevation-z5" >
+    <form [formGroup]="myForm" (ngSubmit)="signUp()">
+        <!-- <img src="./assets/images/seguridad.png" width="50%"> -->
+        <h1>Register</h1>
+        <mat-form-field appearance="outline">
+            <mat-label>Full name</mat-label>
+            <input type="text" formControlName="fullName"matInput>
+            <mat-icon matSuffix>badge</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text" formControlName="email" matInput>
+            <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" formControlName="password" matInput >
+            <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" formControlName="confirmPassword" matInput >
+            <mat-icon matSuffix>password</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="myForm.errors?.['passswordsDontMatch']">
+        Password should match
+        </mat-error>
+        <div class="center margin-top">
+            <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid">
+                <mat-icon>app_registration</mat-icon>
+                Sign Up
+            </button>
+        </div>
+        <span class="center margin-top">New to our platform? <a class="sign-up-link" routerLink="/login">Login</a></span>
+        
 
-<div class="flex flex-column">
-    <span class="text-lg mb-4"> Registro Usuario</span>
-    <mat-form-field>
-        <mat-label>Nombre </mat-label>
-        <input type="text" matInput placeholder="Nombre">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input type="text" matInput placeholder="Email">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input type="password" matInput placeholder="Contraseña">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Confirmar Password</mat-label>
-        <input type="password" matInput placeholder="confirmar contraseña">
-    </mat-form-field>
-    <button  mat-button mat-flat-button color="primary">
-        <mat-icon>app_registration</mat-icon>
-        Registrarse
-    </button>
-    <div class="flex justify-content-end mt-5">
-        <a routerLink="/auth/login">Ya tienes cuenta?</a>
-    </div>
+    </form>
 </div>

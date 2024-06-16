@@ -4,16 +4,17 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardLayoutsComponent } from './layouts/dashboard-layouts/dashboard-layouts.component';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    DashboardLayoutsComponent
+    
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class DashboardModule { }

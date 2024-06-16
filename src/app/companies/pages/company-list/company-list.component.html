@@ -1,1 +1,63 @@
-<p>company-list works!</p>
+<mat-toolbar class="mat-elevation-z10">
+    <span>Companies</span>
+    <button mat-raised-button color="primary" (click)="openAddEditCompany()">AGREGAR</button>
+</mat-toolbar>
+<mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+
+<div *ngIf="companies.length > 0">
+    <mat-form-field appearance="outline" class="margin-top">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="name o foundationYear" #input>
+        <mat-icon matIconSuffix>search</mat-icon>
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="foundationYear">
+            <th mat-header-cell *matHeaderCellDef> foundationYear </th>
+            <td mat-cell *matCellDef="let element"> {{element.foundationYear}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urlImage">
+            <th mat-header-cell *matHeaderCellDef> image </th>
+            <td mat-cell *matCellDef="let element"> <img src="{{element.urlImage}}" width="100px" height="50px" /> </td>
+        </ng-container>
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element" style="text-align:right;">
+                <button mat-icon-button color="primay" (click)="openEditCompany(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <!-- <mat-paginator class="mat-elevation-z10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+</div>
+
+<div class="margin-top-card">
+    <mat-card *ngIf="companies.length===0">
+        <mat-card-content>No hay companies para mostrar</mat-card-content>
+    </mat-card>
+</div>
+<div *ngIf="!loading">
+    <router-outlet />
+</div>

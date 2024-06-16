@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -16,23 +17,59 @@ export class LoginPageComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private _snackBar = inject(MatSnackBar)
 
+  loading = false;
   public myForm: FormGroup = this.fb.group({
 
-    email: ['francisco.osorio1988@gmail.com', [Validators.required, Validators.email]],
-    password: ['ssbmSC1388', [Validators.required, Validators.minLength(6)]]
+    email: ['test1@test.cl', [Validators.required, Validators.email]],
+    password: ['Abc123', [Validators.required, Validators.minLength(6)]]
   });
 
-   login() {
-     const {email, password} = this.myForm.value;
-     this.authService.login(email,password)
-     .subscribe({
-      next: () => this.router.navigateByUrl('/dashboard'),
-      error: (message) => {
-        Swal.fire('Error',message,'error');
-      }
-     })
-   }
+  login() {
+    this.loading = true;
+    const { email, password } = this.myForm.value;
+    this.authService.login(email, password)
+      .subscribe(
+        {
+        next: () => {
+          this.loading = false
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "logged in successfully",
+            showConfirmButton: false,
+            timer: 1500,
+            
+          });
+          this.router.navigateByUrl('/dashboard')
+        },
+        error: (message) => {
+         // Swal.fire('Error',message,'error');
+         Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: message,
+          showConfirmButton: false,
+          timer: 1500,
+          
+        });
+          this.loading = false;
+         // this.error(message);
+        },
+      })
+  }
+  error(message: string,) {
+    this._snackBar.open(
+      message,
+      '',
+      {
+        duration: 5000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      },
+    )
+  }
 
 
 }

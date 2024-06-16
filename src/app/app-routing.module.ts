@@ -6,23 +6,39 @@ import { DashboardLayoutsComponent } from './dashboard/layouts/dashboard-layouts
 
 import { LoginPageComponent } from './auth/pages/login-page/login-page.component';
 import { RegisterPageComponent } from './auth/pages/register-page/register-page.component';
+import { CompanyLayoutComponent } from './companies/layouts/company-layout/company-layout.component';
+import { CompanyListComponent } from './companies/pages/company-list/company-list.component';
 
 const routes: Routes = [
+  {path:'',redirectTo:'login',pathMatch:'full'},
   {
-    path: 'auth',
+    path: 'login',
     canActivate: [isNotAuthenticatedGuard],
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    component:LoginPageComponent
+    //loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },  
   {
-    path: 'dashboard',
-    canActivate:[ isAuthenticatedGuard],
-    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-  },
-  {
-    path: 'companies',
-    canActivate:[ isAuthenticatedGuard],
-    loadChildren: () => import('./companies/companies.module').then(m => m.CompaniesModule),
-  },
+    path: 'register',
+    canActivate: [isNotAuthenticatedGuard],
+    component:RegisterPageComponent
+    //loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+  },  
+   {
+    path:'companies',
+    canActivate:[isAuthenticatedGuard],
+
+        loadChildren: ()=> import('./companies/companies.module').then( m=> m.CompaniesModule)
+      },
+    {
+      path:'dashboard',
+      canActivate:[isAuthenticatedGuard],
+      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    },
+
+   {path:'**',redirectTo:'login',pathMatch:'full'}
+ 
+
+  
 ];
 
 @NgModule({
