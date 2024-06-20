@@ -1,0 +1,17 @@
+<h1 mat-dialog-title> Category Form</h1>
+<form [formGroup]="myForm" (ngSubmit)="createCategory()">
+    <div mat-dialog-content class="">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name category</mat-label>
+                <input formControlName="name" type="text" matInput>
+                <mat-icon matSuffix>category</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid">{{category? 'Update' : 'Save'}}</button>
+    </div>
+</form>

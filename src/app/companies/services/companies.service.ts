@@ -14,12 +14,13 @@ export class CompaniesService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  public addCompany(name: string, foundationYear: string): Observable<Company> {
+  public addCompany(name: string, foundationYear: string, userId: string): Observable<Company> {
     const url = `${this.baseUrl}/api/companies`
     const token = localStorage.getItem('token')
     const body = {
       name,
-      foundationYear
+      foundationYear,
+      userId:userId
     };
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
@@ -33,6 +34,7 @@ export class CompaniesService {
       name: company.name,
       foundationYear: company.foundationYear,
       urlImage: company.urlImage,
+      
     };
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);

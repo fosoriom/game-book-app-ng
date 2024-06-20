@@ -19,6 +19,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { CompanyCreateComponent } from './companies/pages/company-create/company-create.component';
 import { CompanyListComponent } from './companies/pages/company-list/company-list.component';
 import { CustomSidenavComponent } from './shared/components/custom-sidenav/custom-sidenav.component';
+import { CategoryCreateComponent } from './categories/pages/category-create/category-create.component';
 
 
 @NgModule({
@@ -30,8 +31,8 @@ import { CustomSidenavComponent } from './shared/components/custom-sidenav/custo
     CompanyLayoutComponent,
     CompanyCreateComponent,
     CompanyListComponent,
-    CustomSidenavComponent
-
+    CustomSidenavComponent,
+    CategoryCreateComponent
     
   
   ],

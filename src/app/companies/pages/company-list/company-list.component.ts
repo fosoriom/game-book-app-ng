@@ -26,8 +26,9 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.companies);
 
   loading = false;
-  imageCopy = "";
+  
   constructor(private _dialog: MatDialog) { }
+  
   ngOnInit(): void {
 
     this.getCompanies();
@@ -70,8 +71,6 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
     })
   }
   openEditCompany(company: Company) {
-    this.imageCopy = company.urlImage;
-    company.urlImage = company.urlImage + company.id;
     const dialogRef = this._dialog.open(CompanyCreateComponent, {
       data: company
     });
@@ -80,8 +79,6 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
         if (val) {
           this.getCompanies();
 
-        } else {
-          company.urlImage = this.imageCopy;
         }
       }
     })

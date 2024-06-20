@@ -17,6 +17,7 @@ export class CustomSidenavComponent {
   menuItems = signal<MenuItem[]>([
     { "icon":"dashboard","label":"Dashboard","route":"/dashboard"},
     { "icon":"apartment","label":"Companies","route":"/companies/list"},
+    { "icon":"category","label":"Categories","route":"/categories"},
   ])
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '32' :'100')

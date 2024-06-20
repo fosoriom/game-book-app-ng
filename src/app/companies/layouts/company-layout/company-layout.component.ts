@@ -26,7 +26,7 @@ export class CompanyLayoutComponent implements OnInit, AfterViewInit {
   loading = false;
   ngOnInit(): void {
     
-    this.getCompanies();
+   // this.getCompanies();
 
   }
   ngAfterViewInit() {
@@ -37,7 +37,6 @@ export class CompanyLayoutComponent implements OnInit, AfterViewInit {
 
   getCompanies(): void {
     this.loading = true;
-    console.log('cargando...')
     this.companiesService.getCompanies().subscribe(
       companies => {
         

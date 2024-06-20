@@ -27,8 +27,13 @@ const routes: Routes = [
     path:'companies',
     canActivate:[isAuthenticatedGuard],
 
-        loadChildren: ()=> import('./companies/companies.module').then( m=> m.CompaniesModule)
-      },
+        loadChildren: ()=> import('./companies/companies.module').then( m => m.CompaniesModule)
+    },
+    {
+      path:'categories',
+      canActivate:[isAuthenticatedGuard],
+      loadChildren: () => import('./categories/categories.module').then( m => m.CategoriesModule)
+    },
     {
       path:'dashboard',
       canActivate:[isAuthenticatedGuard],

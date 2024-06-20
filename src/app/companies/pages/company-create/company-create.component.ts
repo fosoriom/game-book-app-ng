@@ -47,7 +47,6 @@ export class CompanyCreateComponent implements OnInit {
   TITLE_DIALOG = ""
 
   setTitleDialog() {
-    console.log('title')
     if (this.company) {
       this.TITLE_DIALOG = "Update company"
     } else {
@@ -64,7 +63,7 @@ export class CompanyCreateComponent implements OnInit {
           name: this.myForm.value.name,
           foundationYear: this.myForm.value.foundationYear,
           urlImage: this.myForm.value.urlImage,
-          user: this.authService.currentUser()!
+          userId: this.authService.currentUser()?.id!
 
         }
         this.companiesService.updateCompany(companyEdit)
@@ -87,7 +86,8 @@ export class CompanyCreateComponent implements OnInit {
           })
       } else {
         const { name, foundationYear } = this.myForm.value
-        this.companiesService.addCompany(name, foundationYear)
+        const userId = this.authService.currentUser()?.id!
+        this.companiesService.addCompany(name, foundationYear, userId)
           .subscribe(company => {
             if (this.currentFile) {
               this.filesService.uploadFile(this.currentFile, company.id)

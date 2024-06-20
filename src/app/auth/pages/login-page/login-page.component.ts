@@ -34,26 +34,28 @@ export class LoginPageComponent {
         {
         next: () => {
           this.loading = false
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "logged in successfully",
-            showConfirmButton: false,
-            timer: 1500,
+          this.error('logged in successfully')
+          // Swal.fire({
+          //   position: "top-end",
+          //   icon: "success",
+          //   title: "logged in successfully",
+          //   showConfirmButton: false,
+          //   timer: 1500,
             
-          });
+          // });
           this.router.navigateByUrl('/dashboard')
         },
         error: (message) => {
+          this.error(message);
          // Swal.fire('Error',message,'error');
-         Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: message,
-          showConfirmButton: false,
-          timer: 1500,
+        //  Swal.fire({
+        //   position: "top-end",
+        //   icon: "error",
+        //   title: message,
+        //   showConfirmButton: false,
+        //   timer: 1500,
           
-        });
+        // });
           this.loading = false;
          // this.error(message);
         },
@@ -64,9 +66,10 @@ export class LoginPageComponent {
       message,
       '',
       {
-        duration: 5000,
+        duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
+        
       },
     )
   }
