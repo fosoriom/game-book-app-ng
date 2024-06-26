@@ -17,35 +17,29 @@ export class CategoriesService {
 
   getCategories():Observable<Category[]> {
     const url = `${this.baseUrl}/api/categories`
-    const token = localStorage.getItem('token')
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-    return this.http.get<Category[]>(url, { headers });
+
+    return this.http.get<Category[]>(url);
 
   }
     
   
   public addCategory(name:string, userId:string){
     const url = `${this.baseUrl}/api/categories`
-    const token = localStorage.getItem('token')
+    
     const body = {
       name,
       userId
     };
 
-    const headers = new HttpHeaders()
-    .set('Authorization', `Bearer ${token}`);
-  return this.http.post<Category>(url, body, { headers }); 
+  return this.http.post<Category>(url, body); 
   }
 
   public updateCategory(category:Category): Observable<Category> {
     const url = `${this.baseUrl}/api/categories/${category.id}`
-    const token = localStorage.getItem('token')
+    
     const body = {
       name:category.name
     };
-    const headers = new HttpHeaders()
-    .set('Authorization', `Bearer ${token}`);
-    return this.http.patch<Category>(url, body, { headers }); 
+    return this.http.patch<Category>(url, body); 
   }
 }

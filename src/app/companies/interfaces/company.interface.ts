@@ -4,7 +4,7 @@ export interface Company {
     id: string;
     name: string;
     foundationYear: string;
-    urlImage: string;
+    url: string;
     userId: string
 }
 

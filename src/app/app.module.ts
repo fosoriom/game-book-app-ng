@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,8 @@ import { CompanyCreateComponent } from './companies/pages/company-create/company
 import { CompanyListComponent } from './companies/pages/company-list/company-list.component';
 import { CustomSidenavComponent } from './shared/components/custom-sidenav/custom-sidenav.component';
 import { CategoryCreateComponent } from './categories/pages/category-create/category-create.component';
+import { CustomeInterceptor } from './auth/guards/custome.interceptor';
+
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { CategoryCreateComponent } from './categories/pages/category-create/cate
     
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptors([CustomeInterceptor]))
   ],
   bootstrap: [AppComponent]
 })

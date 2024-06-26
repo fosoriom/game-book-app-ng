@@ -21,7 +21,7 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   private router = inject(Router);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['id', 'name', 'foundationYear', 'urlImage', 'acciones'];
+  displayedColumns: string[] = ['id', 'name', 'foundationYear', 'url', 'acciones'];
   //dataSource!: MatTableDataSource<Company>;
   dataSource = new MatTableDataSource(this.companies);
 

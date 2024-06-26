@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth-service.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class CompanyCreateComponent implements OnInit {
   private authService = inject(AuthService)
   private filesService = inject(FilesService)
   private router = inject(Router)
+  private _snackBar = inject(MatSnackBar)
   isDisabled: boolean = true;
 
   constructor(
     private _dialogRef: MatDialogRef<CompanyCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public company: Company
+    
   ) { }
   ngOnInit(): void {
 
@@ -35,7 +38,7 @@ export class CompanyCreateComponent implements OnInit {
     id: '',
     name: ['', [Validators.required]],
     foundationYear: ['', [Validators.required, Validators.minLength(4)]],
-    urlImage: ['']
+    url: ['']
   });
   public user = computed(() => this.authService.currentUser());
   //selectedFile: File | null = null;
@@ -62,7 +65,7 @@ export class CompanyCreateComponent implements OnInit {
           id: this.myForm.value.id,
           name: this.myForm.value.name,
           foundationYear: this.myForm.value.foundationYear,
-          urlImage: this.myForm.value.urlImage,
+          url: this.myForm.value.url,
           userId: this.authService.currentUser()?.id!
 
         }
@@ -71,16 +74,17 @@ export class CompanyCreateComponent implements OnInit {
             if (this.currentFile) { //si actualiza imagen
               this.filesService.uploadFile(this.currentFile, this.company.id)
                 .subscribe(res => {
-                  companyEdit.urlImage = res.url;
+                  companyEdit.url = res.url;
                   this.companiesService.updateCompany(companyEdit)
                     .subscribe(result => {
-                      alert('company with image update success');
+                      this.error('company with image update success');
                       this._dialogRef.close(true);
                     })
 
                 })
             } else {
-              alert('company update success');
+              
+              this.error('company update success');
               this._dialogRef.close(true);
             }
           })
@@ -92,10 +96,11 @@ export class CompanyCreateComponent implements OnInit {
             if (this.currentFile) {
               this.filesService.uploadFile(this.currentFile, company.id)
                 .subscribe(succes => {
-                  company.urlImage = succes.url;
+                  company.url = succes.url;
                   this.companiesService.updateCompany(company)
                     .subscribe(result => {
-                      alert('company add success');
+                      
+                      this.error('company add success')
                       this._dialogRef.close(true);
                     })
                 });
@@ -131,5 +136,17 @@ export class CompanyCreateComponent implements OnInit {
     }
 
 
+  }
+  error(message: string,) {
+    this._snackBar.open(
+      message,
+      '',
+      {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+        
+      },
+    )
   }
 }

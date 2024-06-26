@@ -16,39 +16,30 @@ export class CompaniesService {
 
   public addCompany(name: string, foundationYear: string, userId: string): Observable<Company> {
     const url = `${this.baseUrl}/api/companies`
-    const token = localStorage.getItem('token')
     const body = {
       name,
       foundationYear,
-      userId:userId
+      userId: userId
     };
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-    return this.http.post<Company>(url, body, { headers });
+
+    return this.http.post<Company>(url, body);
 
   }
-  public updateCompany(company : Company): Observable<Company> {
+  public updateCompany(company: Company): Observable<Company> {
     const url = `${this.baseUrl}/api/companies/${company.id}`
-    const token = localStorage.getItem('token')
     const body = {
       name: company.name,
       foundationYear: company.foundationYear,
-      urlImage: company.urlImage,
-      
+      url: company.url,
     };
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-    return this.http.patch<Company>(url, body, { headers });
+
+    return this.http.patch<Company>(url, body);
   }
 
   public getCompanies(): Observable<Company[]> {
 
-
     const url = `${this.baseUrl}/api/companies`
-    const token = localStorage.getItem('token')
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-    return this.http.get<Company[]>(url, { headers });
+    return this.http.get<Company[]>(url);
   }
 
 }
