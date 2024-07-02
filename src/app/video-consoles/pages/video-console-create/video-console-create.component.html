@@ -1,0 +1,42 @@
+<h1 mat-dialog-title> Video Console Form</h1>
+<form [formGroup]="myForm" (ngSubmit)="createVideoConsole()">
+    <div mat-dialog-content class="">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name video console</mat-label>
+                <input formControlName="name" type="text" matInput>
+                <mat-icon matSuffix>videogame_asset</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Release Date</mat-label>
+                <input formControlName="releaseDate" type="text" matInput >
+                <mat-icon matSuffix>event</mat-icon>
+                <mat-hint>YYYY</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>company</mat-label>
+                <mat-select formControlName="companyId" required>
+                    <mat-option>--</mat-option>
+                    @for (animal of companies; track animal) {
+                      <mat-option [value]="animal.id">{{animal.name}}</mat-option>
+                    }
+                  </mat-select>
+                <mat-icon matSuffix>apartment</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <input type="file" (change)="onFileSelected($event)" />
+        </div>
+        <div class="row">
+            <img [src]="preview" class="preview" />
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid ||isDisabled" >{{videoConsole? 'Update' : 'Save'}}</button>
+    </div>
+</form>

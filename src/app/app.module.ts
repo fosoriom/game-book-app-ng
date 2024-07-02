@@ -21,6 +21,8 @@ import { CompanyListComponent } from './companies/pages/company-list/company-lis
 import { CustomSidenavComponent } from './shared/components/custom-sidenav/custom-sidenav.component';
 import { CategoryCreateComponent } from './categories/pages/category-create/category-create.component';
 import { CustomeInterceptor } from './auth/guards/custome.interceptor';
+import { VideoConsoleLayoutComponent } from './video-consoles/pages/video-console-layout/video-console-layout.component';
+import { VideoConsoleCreateComponent } from './video-consoles/pages/video-console-create/video-console-create.component';
 
 
 
@@ -34,7 +36,9 @@ import { CustomeInterceptor } from './auth/guards/custome.interceptor';
     CompanyCreateComponent,
     CompanyListComponent,
     CustomSidenavComponent,
-    CategoryCreateComponent
+    CategoryCreateComponent,
+    VideoConsoleLayoutComponent,
+    VideoConsoleCreateComponent
     
   
   ],

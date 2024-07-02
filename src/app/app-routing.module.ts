@@ -10,44 +10,49 @@ import { CompanyLayoutComponent } from './companies/layouts/company-layout/compa
 import { CompanyListComponent } from './companies/pages/company-list/company-list.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     canActivate: [isNotAuthenticatedGuard],
-    component:LoginPageComponent
+    component: LoginPageComponent
     //loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-  },  
+  },
   {
     path: 'register',
     canActivate: [isNotAuthenticatedGuard],
-    component:RegisterPageComponent
+    component: RegisterPageComponent
     //loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-  },  
-   {
-    path:'companies',
-    canActivate:[isAuthenticatedGuard],
+  },
+  {
+    path: 'companies',
+    canActivate: [isAuthenticatedGuard],
 
-        loadChildren: ()=> import('./companies/companies.module').then( m => m.CompaniesModule)
-    },
-    {
-      path:'categories',
-      canActivate:[isAuthenticatedGuard],
-      loadChildren: () => import('./categories/categories.module').then( m => m.CategoriesModule)
-    },
-    {
-      path:'dashboard',
-      canActivate:[isAuthenticatedGuard],
-      loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-    },
+    loadChildren: () => import('./companies/companies.module').then(m => m.CompaniesModule)
+  },
+  {
+    path: 'categories',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+  },
+  {
+    path: 'dashboard',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'video-consoles',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./video-consoles/video-consoles.module').then(m => m.VideoConsolesModule)
+  },
 
-   {path:'**',redirectTo:'login',pathMatch:'full'}
- 
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
-  
+
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
