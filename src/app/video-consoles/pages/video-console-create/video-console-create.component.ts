@@ -79,6 +79,7 @@ export class VideoConsoleCreateComponent implements OnInit {
         this.videoConsoleService.updateVideoConsole(this.videoConsole)
           .subscribe({
             next: (videoConsole) => {
+              this.isDisabled = true;
               if (this.currentFile) {
                 this.filesService.uploadFile(this.currentFile, this.videoConsole.id)
                   .subscribe({
@@ -114,12 +115,10 @@ export class VideoConsoleCreateComponent implements OnInit {
       } else {
         this.myForm.value.userId = this.authService.currentUser()?.id!
         this.videoConsoleService.addVideoConsole(this.myForm.value)
-          .subscribe(
-            {
+          .subscribe({
 
               next: (videoConsole) => {
                 this.isDisabled = true
-                
                 if (this.currentFile) {
                   this.filesService.uploadFile(this.currentFile, videoConsole.id)
                     .subscribe({

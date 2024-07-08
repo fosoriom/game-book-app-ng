@@ -42,7 +42,7 @@ export class VideoConsoleLayoutComponent implements OnInit {
     })
 
   }
-  openEditVideoComsole(videoConsole:VideoConsole){
+  openEditVideoConsole(videoConsole:VideoConsole){
     videoConsole.companyId = videoConsole.company.id
     const dialogRef = this._dialog.open(VideoConsoleCreateComponent, {
       data: videoConsole
@@ -60,8 +60,8 @@ export class VideoConsoleLayoutComponent implements OnInit {
   getVideoConsoles(): void {
     this.loading = true;
     this.videoConsolesService.getVideoConsoles().subscribe(
-      companies => {
-        this.videoConsoles = companies;
+      consoles => {
+        this.videoConsoles = consoles;
         this.dataSource = new MatTableDataSource(this.videoConsoles);
         this.loading = false;
       });
@@ -82,7 +82,7 @@ export class VideoConsoleLayoutComponent implements OnInit {
         }
 
       },error:(message) => {
-
+        this.error(message);
       }
     })
     

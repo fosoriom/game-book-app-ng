@@ -23,12 +23,12 @@ export class CompanyCreateComponent implements OnInit {
   private filesService = inject(FilesService)
   private router = inject(Router)
   private _snackBar = inject(MatSnackBar)
-  isDisabled: boolean = true;
+  isDisabled: boolean = false;
 
   constructor(
     private _dialogRef: MatDialogRef<CompanyCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public company: Company
-    
+
   ) { }
   ngOnInit(): void {
 
@@ -71,6 +71,7 @@ export class CompanyCreateComponent implements OnInit {
         }
         this.companiesService.updateCompany(companyEdit)
           .subscribe(result => {
+            this.isDisabled = true;
             if (this.currentFile) { //si actualiza imagen
               this.filesService.uploadFile(this.currentFile, this.company.id)
                 .subscribe(res => {
@@ -83,7 +84,7 @@ export class CompanyCreateComponent implements OnInit {
 
                 })
             } else {
-              
+
               this.error('company update success');
               this._dialogRef.close(true);
             }
@@ -93,13 +94,14 @@ export class CompanyCreateComponent implements OnInit {
         const userId = this.authService.currentUser()?.id!
         this.companiesService.addCompany(name, foundationYear, userId)
           .subscribe(company => {
+            this.isDisabled = true
             if (this.currentFile) {
               this.filesService.uploadFile(this.currentFile, company.id)
                 .subscribe(succes => {
                   company.url = succes.url;
                   this.companiesService.updateCompany(company)
                     .subscribe(result => {
-                      
+
                       this.error('company add success')
                       this._dialogRef.close(true);
                     })
@@ -145,7 +147,7 @@ export class CompanyCreateComponent implements OnInit {
         duration: 2000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
-        
+
       },
     )
   }

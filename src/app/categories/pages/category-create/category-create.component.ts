@@ -24,6 +24,7 @@ export class CategoryCreateComponent implements OnInit {
     name: ['', [Validators.required]],
   });
   TITLE_DIALOG = ""
+  isDisabled: boolean = false;
   constructor(
     private _dialogRef: MatDialogRef<CategoryCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public category: Category
@@ -52,6 +53,7 @@ export class CategoryCreateComponent implements OnInit {
         }
         this.categoriesService.updateCategory(category).subscribe({
           next: () => {
+            this.isDisabled = true;
             this.error('Category update success');
             this._dialogRef.close(true);
           },
@@ -64,6 +66,7 @@ export class CategoryCreateComponent implements OnInit {
         const { name } = this.myForm.value;
         this.categoriesService.addCategory(name, this.user()?.id!).subscribe({
           next: () => {
+            this.isDisabled = true;
             this.error('Category add success');
             this._dialogRef.close(true);
           },

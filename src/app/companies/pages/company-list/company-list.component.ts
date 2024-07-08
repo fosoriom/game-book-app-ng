@@ -45,7 +45,7 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
     this.companiesService.getCompanies().subscribe(
       companies => {
         this.companies = companies;
-        this.dataSource = new MatTableDataSource(this.companies);
+        this.dataSource.data = this.companies;
         this.loading = false;
       });
 

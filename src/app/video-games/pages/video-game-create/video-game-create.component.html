@@ -1,11 +1,11 @@
-<h1 mat-dialog-title> Video Console Form</h1>
-<form [formGroup]="myForm" (ngSubmit)="createVideoConsole()">
+<h1 mat-dialog-title> Video Game Form</h1>
+<form [formGroup]="myForm" (ngSubmit)="createVideoGame()">
     <div mat-dialog-content class="">
         <div class="row">
             <mat-form-field appearance="outline">
-                <mat-label>Name video console</mat-label>
+                <mat-label>Name video game</mat-label>
                 <input formControlName="name" type="text" matInput>
-                <mat-icon matSuffix>videogame_asset</mat-icon>
+                <mat-icon matSuffix>sports_esports</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Release Date</mat-label>
@@ -16,14 +16,14 @@
         </div>
         <div class="row">
             <mat-form-field appearance="outline">
-                <mat-label>company</mat-label>
-                <mat-select formControlName="companyId" required>
+                <mat-label>Video console</mat-label>
+                <mat-select formControlName="videoConsoleId" required>
                     <mat-option>--</mat-option>
-                    @for (company of companies; track company) {
-                    <mat-option [value]="company.id">{{company.name}}</mat-option>
+                    @for (console of videoConsoles; track console) {
+                    <mat-option [value]="console.id">{{console.name}}</mat-option>
                     }
                 </mat-select>
-                <mat-icon matSuffix>apartment</mat-icon>
+                <mat-icon matSuffix>videogame_asset</mat-icon>
             </mat-form-field>
         </div>
         <div class="row">
@@ -36,9 +36,14 @@
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <!-- <button type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid ||isDisabled" >
+            <mat-spinner *ngIf="isDisabled" class="spinner" diameter="50"></mat-spinner>
+        </button> -->
         <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid ||isDisabled">
             <mat-spinner class="spinner" diameter="20" *ngIf="isDisabled"></mat-spinner>
-            <span *ngIf="!isDisabled">{{videoConsole? 'Update' : 'Save'}}</span>
+            <span *ngIf="!isDisabled">{{videoGame? 'Update' : 'Save'}}</span>
         </button>
+
     </div>
 </form>

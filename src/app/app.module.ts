@@ -23,6 +23,8 @@ import { CategoryCreateComponent } from './categories/pages/category-create/cate
 import { CustomeInterceptor } from './auth/guards/custome.interceptor';
 import { VideoConsoleLayoutComponent } from './video-consoles/pages/video-console-layout/video-console-layout.component';
 import { VideoConsoleCreateComponent } from './video-consoles/pages/video-console-create/video-console-create.component';
+import { VideoGameLayoutComponent } from './video-games/pages/video-game-layout/video-game-layout.component';
+import { VideoGameCreateComponent } from './video-games/pages/video-game-create/video-game-create.component';
 
 
 
@@ -38,7 +40,9 @@ import { VideoConsoleCreateComponent } from './video-consoles/pages/video-consol
     CustomSidenavComponent,
     CategoryCreateComponent,
     VideoConsoleLayoutComponent,
-    VideoConsoleCreateComponent
+    VideoConsoleCreateComponent,
+    VideoGameLayoutComponent,
+    VideoGameCreateComponent
     
   
   ],

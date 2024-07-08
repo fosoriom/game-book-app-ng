@@ -19,6 +19,7 @@ export class CustomSidenavComponent {
     { "icon":"apartment","label":"Companies","route":"/companies/list"},
     { "icon":"category","label":"Categories","route":"/categories"},
     { "icon":"videogame_asset","label":"Video Consoles","route":"/video-consoles"},
+    { "icon":"sports_esports","label":"Video Games","route":"/video-games"},
   ])
 
   profilePicSize = computed(() => this.sideNavCollapsed() ? '32' :'100')

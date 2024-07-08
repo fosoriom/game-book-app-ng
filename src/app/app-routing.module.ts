@@ -39,12 +39,17 @@ const routes: Routes = [
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
+  
   {
     path: 'video-consoles',
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./video-consoles/video-consoles.module').then(m => m.VideoConsolesModule)
   },
-
+  {
+    path: 'video-games',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./video-games/video-games.module').then(m => m.VideoGamesModule)
+  },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 
 
