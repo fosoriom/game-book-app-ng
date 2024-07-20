@@ -1,0 +1,49 @@
+<h1 mat-dialog-title> Accessory Console Form</h1>
+<form [formGroup]="myForm" (ngSubmit)="createAccesoryConsole()">
+    <div mat-dialog-content class="">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Name video game</mat-label>
+                <input formControlName="name" type="text" matInput>
+                <mat-icon matSuffix>sports_esports</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Release Date</mat-label>
+                <input formControlName="releaseDate" type="text" matInput>
+                <mat-icon matSuffix>event</mat-icon>
+                <mat-hint>YYYY</mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Video console</mat-label>
+                <mat-select formControlName="videoConsoleId" required>
+                    <mat-option>--</mat-option>
+                    @for (console of videoConsoles; track console) {
+                    <mat-option [value]="console.id">{{console.name}}</mat-option>
+                    }
+                </mat-select>
+                <mat-icon matSuffix>videogame_asset</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <input type="file" (change)="onFileSelected($event)" />
+        </div>
+        <div class="row">
+            <img [src]="preview" class="preview" />
+        </div>
+
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <!-- <button type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid ||isDisabled" >
+            <mat-spinner *ngIf="isDisabled" class="spinner" diameter="50"></mat-spinner>
+        </button> -->
+        <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid ||isDisabled">
+            <mat-spinner class="spinner" diameter="20" *ngIf="isDisabled"></mat-spinner>
+            <span *ngIf="!isDisabled">{{consoleAccesory? 'Update' : 'Save'}}</span>
+        </button>
+
+    </div>
+</form>

@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-  
+
   {
     path: 'video-consoles',
     canActivate: [isAuthenticatedGuard],
@@ -49,6 +49,11 @@ const routes: Routes = [
     path: 'video-games',
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./video-games/video-games.module').then(m => m.VideoGamesModule)
+  },
+  {
+    path: 'console-accesories',
+    canActivate: [isAuthenticatedGuard],
+    loadChildren: () => import('./console-accesories/console-accesories.module').then(m => m.ConsoleAccesoriesModule)
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 

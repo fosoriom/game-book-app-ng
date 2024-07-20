@@ -1,10 +1,10 @@
 <mat-toolbar class="mat-elevation-z10">
-    <span>Video Games</span>
-    <button mat-raised-button color="primary" (click)="openAddVideoConsole()">AGREGAR</button>
+    <span>Console Accesories</span>
+    <button mat-raised-button color="primary" (click)="openAddConsoleAccesory()">AGREGAR</button>
 </mat-toolbar>
 <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
 
-<div *ngIf="videoGames.length > 0">
+<div *ngIf="consoleAccesories.length > 0">
     <mat-form-field appearance="outline" class="margin-top">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="name o foundationYear" #input>
@@ -45,14 +45,14 @@
             <th mat-header-cell *matHeaderCellDef> taken </th>
             <td mat-cell *matCellDef="let element"> <mat-icon>{{element.take?'handshake' :'label_off'}}</mat-icon></td>
         </ng-container> -->
-        <ng-container matColumnDef="consoles">
+        <ng-container matColumnDef="console">
             <th mat-header-cell *matHeaderCellDef> console </th>
             <td mat-cell *matCellDef="let element"> {{element.videoConsole.name}} </td>
         </ng-container>
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let element" style="text-align:right;">
-                <button mat-icon-button color="primay" (click)="openEditVideoGame(element)">
+                <button mat-icon-button color="primay" (click)="openEditConsoleAccesory(element)">
                     <mat-icon>edit</mat-icon>
                 </button>
             </td>
@@ -66,7 +66,7 @@
 </div>
 
 <div class="margin-top-card">
-    <mat-card *ngIf="videoGames.length===0">
+    <mat-card *ngIf="consoleAccesories.length===0">
         <mat-card-content>No hay video coles para mostrar</mat-card-content>
     </mat-card>
 </div>

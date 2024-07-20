@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild, inject } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VideoGamesService } from '../../services/video-games.service';
 import { VideoConsolesService } from '../../../video-consoles/services/video-consoles.service';
@@ -14,7 +14,7 @@ import { VideoGame } from '../../interfaces/video-game.interface';
   templateUrl: './video-game-create.component.html',
   styleUrl: './video-game-create.component.css'
 })
-export class VideoGameCreateComponent {
+export class VideoGameCreateComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private videoGamesService = inject(VideoGamesService)
@@ -97,7 +97,7 @@ export class VideoGameCreateComponent {
                 }
               })
             }else {
-              this.error('Video console update success')
+              this.error('Video game update success')
               this._dialogRef.close(true);
             }
           }, error: (message) => {

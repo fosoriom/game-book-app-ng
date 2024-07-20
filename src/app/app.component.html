@@ -1,4 +1,4 @@
-<mat-toolbar color="primary"class="mat-elevation-z3">
+<mat-toolbar *ngIf="user()!=null"color="primary"class="mat-elevation-z3">
     <button mat-icon-button (click)="collapsed.set(!collapsed())">
         <mat-icon *ngIf="user()!=null">menu</mat-icon>
     </button>
@@ -7,6 +7,7 @@
         Logout
     </button>
 </mat-toolbar>
+<app-footer *ngIf="user()==null"></app-footer>
 <mat-sidenav-container *ngIf="user()!=null">
     <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
         <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
@@ -16,7 +17,8 @@
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
-</mat-sidenav-container>
-<div class="content">
-    <router-outlet *ngIf="user()==null"></router-outlet>
-</div>
+    </mat-sidenav-container>
+    <div class="content">
+        <router-outlet *ngIf="user()==null"></router-outlet>
+        </div>
+    <app-footer *ngIf="user()!=null"></app-footer>

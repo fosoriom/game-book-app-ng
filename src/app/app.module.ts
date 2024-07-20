@@ -25,6 +25,9 @@ import { VideoConsoleLayoutComponent } from './video-consoles/pages/video-consol
 import { VideoConsoleCreateComponent } from './video-consoles/pages/video-console-create/video-console-create.component';
 import { VideoGameLayoutComponent } from './video-games/pages/video-game-layout/video-game-layout.component';
 import { VideoGameCreateComponent } from './video-games/pages/video-game-create/video-game-create.component';
+import { ConsoleAccesoryLayoutComponent } from './console-accesories/pages/console-accesory-layout/console-accesory-layout.component';
+import { ConsoleAccesoryCreateComponent } from './console-accesories/pages/console-accesory-create/console-accesory-create.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 
 
@@ -42,9 +45,10 @@ import { VideoGameCreateComponent } from './video-games/pages/video-game-create/
     VideoConsoleLayoutComponent,
     VideoConsoleCreateComponent,
     VideoGameLayoutComponent,
-    VideoGameCreateComponent
-    
-  
+    VideoGameCreateComponent,
+    ConsoleAccesoryLayoutComponent,
+    ConsoleAccesoryCreateComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -56,8 +60,6 @@ import { VideoGameCreateComponent } from './video-games/pages/video-game-create/
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    
-    
   ],
   providers: [
     provideAnimationsAsync(),
